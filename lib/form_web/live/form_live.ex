@@ -1,4 +1,5 @@
 defmodule FormWeb.FormLive do
+  alias Form.Content.Product
   use FormWeb, :live_view
   def render(assigns) do
     ~H"""
@@ -52,11 +53,29 @@ defmodule FormWeb.FormLive do
         </div>
       </div>
     </form>
+
+
+
+
+    <br>
+    <br>
+    <.form let={f} for={@changeset}>
+      <%= text_input f, :name %>
+      <%= text_input f, :code %>
+      <%= text_input f, :amount %>
+      <%= text_input f, :description %>
+      <%= submit "Save Product" %>
+    </.form>
+
+
+
+
+
     """
   end
 
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :name, "hector")}
+    {:ok, assign(socket, name: "hector", changeset: Product.changeset(%Product{}))}
   end
 
   def handle_event("name", _value, socket) do
