@@ -20,6 +20,9 @@ defmodule FormWeb.Router do
     get "/", PageController, :index
 
     live "/form", FormLive
+    live "/form_db", FormDbLive
+    live "/filter", FormFilter
+    live "/filter2", FormFilter2
   end
 
   # Other scopes may use custom stacks.

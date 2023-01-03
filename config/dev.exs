@@ -3,7 +3,7 @@ import Config
 # Configure your database
 config :form, Form.Repo,
   username: "postgres",
-  password: "111",
+  password: "postgres",
   hostname: "localhost",
   database: "form_dev",
   stacktrace: true,
