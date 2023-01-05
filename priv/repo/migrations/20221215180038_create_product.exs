@@ -7,6 +7,8 @@ defmodule Form.Repo.Migrations.CreateProduct do
       add :code, :integer
       add :amount, :integer
       add :description, :text
+      add :cantidad, :float
+      add :total, :float
 
       timestamps()
     end

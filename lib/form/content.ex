@@ -19,15 +19,13 @@ defmodule Form.Content do
   def filter_product(params) do
     condition =
       Enum.reject(params, fn {k, v} -> v == "" or k == "include" or k == "quantity" end)
-      |>  Enum.map(fn {k, v} ->
-            {String.to_atom(k), v}
-          end)
+      |>  Enum.map(fn {k, v} -> {String.to_atom(k), v} end)
+
     quantity = String.to_integer(params["quantity"])
+
     query = cond do
       Map.get(params, "include") == "" ->
-        from u in Product,
-        where: ^condition,
-        limit: ^quantity
+        from(u in Product, [where: ^condition, limit: ^quantity])
       length(condition) != 0 ->
         from u in Product,
         where: like(u.name, ^"%#{params["include"]}%"),
@@ -38,8 +36,7 @@ defmodule Form.Content do
         where: like(u.name, ^"%#{params["include"]}%"),
         limit: ^quantity
       length(condition) == 0 and Map.get(params, "include") == "" ->
-        from u in Product,
-        limit: ^quantity
+        from(u in Product, [limit: ^quantity])
       end
     Repo.all(query)
   end

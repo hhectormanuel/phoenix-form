@@ -172,7 +172,7 @@ defmodule FormWeb.FormFilter2 do
   def mount(_params, _session, socket) do
     alias Form.Content.Product
     changeset = Product.changeset(%Product{})
-    {:ok, assign(socket, changeset: changeset, products: Content.list_product(), form_update: nil)}
+    {:ok, assign(socket, changeset: changeset, products: Content.list_product_order(), form_update: nil)}
   end
 
   def handle_event("save",%{"product" => product} = _params, socket) do
